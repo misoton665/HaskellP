@@ -1,1 +1,1 @@
-removeUpper list = [x| x <- list, x `elem` ['A'..'Z']]
+removeUpper list = [x| x <- list, x `elem` ['a'..'z']]
