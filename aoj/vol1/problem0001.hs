@@ -1,3 +1,5 @@
+import Data.List
 main = do
-  inputs <- replicate 10 getLine 
-  putStrLn $ "Hello"
+  inputs <- sequence $ replicate 10 getLine 
+  let hills = map read inputs :: [Int]
+  mapM print $ take 3 $ reverse . sort $ hills
