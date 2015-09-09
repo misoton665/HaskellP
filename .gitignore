@@ -1,0 +1,4 @@
+sandbox
+*.o
+*.out
+*.hi
