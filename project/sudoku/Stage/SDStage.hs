@@ -1,23 +1,20 @@
-module SDStage(SDNum, SDPosition, SDSquare,
-        mkSDNum, mkSDPosition, mkSDSquare) where
+module Stage.SDStage(
+  SDStage,
+  sdsquares,
+  mkEmptySDStage,
+  mkEmptyRow
+  ) where
 
-data SDNum = SDNum Int deriving (Eq, Show)
+import Stage.SDNum
+import Stage.SDPosition
+import Stage.SDSquare
 
-data SDPosition = SDPosition {
-  x :: SDNum,
-  y :: SDNum
-  } deriving (Eq, Show)
-
-data SDSquare = SDSquare {
-  position :: SDPosition,
-  num :: SDNum
+data SDStage = SDStage {
+  sdsquares :: [[SDSquare]]
   } deriving (Show)
 
-mkSDNum :: Int -> SDNum
-mkSDNum n = SDNum n
+mkEmptySDStage :: SDStage
+mkEmptySDStage = SDStage $ replicate 9 mkEmptyRow
 
-mkSDPosition :: SDNum -> SDNum -> SDPosition
-mkSDPosition x y = SDPosition x y
-
-mkSDSquare :: SDPosition -> SDNum -> SDSquare
-mkSDSquare pos num = SDSquare pos num
+mkEmptyRow :: [SDSquare]
+mkEmptyRow = replicate 9 mkEmptySDSquare
