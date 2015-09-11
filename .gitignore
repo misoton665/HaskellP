@@ -2,3 +2,4 @@ sandbox
 *.o
 *.out
 *.hi
+*.test
