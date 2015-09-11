@@ -1,6 +1,6 @@
 # 数独ゲーム仕様
 ## ルール
-###　数独-Wikipedia https://ja.wikipedia.org/wiki/%E6%95%B0%E7%8B%AC
+数独-Wikipedia https://ja.wikipedia.org/wiki/%E6%95%B0%E7%8B%AC
 ## テーブル
 <pre>
     1       2       3       4       5       6       7       8       9
@@ -72,15 +72,15 @@
 *[number]*
 *command*に使用する1~9の数字。範囲外の場合は無視する。
 
-
-< 例 >
-<pre>put 1 2 3
+**例**
+<pre>
+put 1 2 3
 rm 1 2
 hold 4 5 6
-rmhold 4 5 6</pre>
+rmhold 4 5 6
+</pre>
 
 ### 二段階目
-
 入力はコンスタントに受け取り、テーブル上の入力カーソルを移動させて操作対象のマスを決める。
 
 #### カーソル
