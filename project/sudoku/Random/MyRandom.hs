@@ -1,4 +1,7 @@
-module MyRandom(rand, rand3) where
+module Random.MyRandom(
+  rand,
+  rand3
+  ) where
 
 import System.Random
 
