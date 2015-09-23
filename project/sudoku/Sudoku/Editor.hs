@@ -1,13 +1,15 @@
 module Sudoku.Editor (
-  editStage,
-  editSquare
+  editSDStage,
+  editSDSquare
   ) where
 
 import Sudoku.Data
-import Sudoku.Generator
+import Sudoku.Generater
 
-editStage :: SDPosition -> SDNum -> SDStage -> SDStage
-editStage = undefined
+editSDStage :: SDSquare -> SDStage -> SDStage
+editSDStage newSqu oldStage = map (mapEditIfMatched newSqu) oldStage
+  where isMatchWith a b = (getSDPos a) == (getSDPos b)
+        mapEditIfMatched newSqu row = map (\a -> if (a `isMatchWith` newSqu) then editSDSquare (getSDNum newSqu) a else a) row
 
-editSquare :: SDNum -> SDSquare
-editSquare = undefined
+editSDSquare :: SDNum -> SDSquare -> SDSquare
+editSDSquare num oldSqu = SDSquare (getSDPos oldSqu) num
