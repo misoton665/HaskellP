@@ -12,6 +12,7 @@ main = do
       formedStage = newFormedSDStage
       sdEdittedSquare = editSDSquare (Just 5) sdSquare
       sdEdittedStage = editSDStage sdEdittedSquare formedStage
+      sdEdittedStage2 = editSDStage' (2, 4) (Just 9) sdEdittedStage
   putStrLn $ showSDNum sdNum
   putStrLn $ showSDPos sdPosition
   putStrLn $ showSDSquare sdSquare
@@ -23,3 +24,5 @@ main = do
   putStrLn $ showSDStage sdStage
   putStrLn $ showSDStageSimply sdStage
   putStrLn $ showSDStageSimply sdEdittedStage
+  putStrLn $ showSDStageSimply sdEdittedStage2
+
