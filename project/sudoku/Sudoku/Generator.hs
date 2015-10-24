@@ -1,4 +1,4 @@
-module Sudoku.Generater (
+module Sudoku.Generator (
   newFormedSDRow,
   newFormedSDStage
   ) where

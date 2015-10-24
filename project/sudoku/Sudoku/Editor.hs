@@ -5,7 +5,7 @@ module Sudoku.Editor (
   ) where
 
 import Sudoku.Data
-import Sudoku.Generater
+import Sudoku.Generator
 
 editSDStage :: SDSquare -> SDStage -> SDStage
 editSDStage newSqu oldStage = map (mapEditIfMatched newSqu) oldStage
