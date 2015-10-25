@@ -2,26 +2,35 @@ module Controller.Game (
   game
   ) where
 
+import Control.Applicative
+
 import Command.TestCommand as TCom
 import Command.Data
 import Sudoku.Data
 import Sudoku.Generator
 
-game :: IO ()
-game = do
+game :: SDStage -> IO ()
+game stage = do
   result <- gameAction
   case result of
     Nothing    -> return ()
     (Just val) -> do
-      session val
-      game
+      session stage val >>= game
 
-session :: Command -> IO ()
-session command = case command of
-  UndefinedCommand name -> putStrLn $ "\"" ++ name ++ "\" command is not found."
-  TestCommand _ _ _ -> putStrLn . showSDStage $ TCom.command command newFormedSDStage
-  NoCommand -> return ()
-  otherwise -> putStrLn . show $ command
+session :: SDStage -> Command -> IO SDStage
+session stage command = case command of
+  UndefinedCommand name -> do 
+    putStrLn $ "\"" ++ name ++ "\" command is not found."
+    return stage
+  
+  TestCommand _ _ _ -> do 
+    let newStage = TCom.command command stage
+    putStrLn . showSDStage $ newStage
+    return newStage
+
+  otherwise -> do 
+    putStrLn . show $ command
+    return stage
 
 gameAction :: IO (Maybe Command)
 gameAction = do

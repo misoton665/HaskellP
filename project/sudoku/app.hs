@@ -1,3 +1,4 @@
 import Controller.Game
+import Sudoku.Generator
 
-main = game
+main = game newFormedSDStage
