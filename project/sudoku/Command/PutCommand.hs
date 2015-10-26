@@ -1,4 +1,4 @@
-module Command.TestCommand (
+module Command.PutCommand (
   command
 ) where
 
@@ -7,4 +7,4 @@ import Sudoku.Editor
 import Command.Data
 
 command :: Command -> SDStage -> (SDStage)
-command TestCommand stage = rotateSDStage stage
+command (PutCommand x y val) stage = editSDStage' (x, y) (Just val) stage

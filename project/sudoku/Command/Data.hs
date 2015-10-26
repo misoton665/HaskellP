@@ -2,7 +2,7 @@ module Command.Data (
     Command(..)
   ) where
 
-data Command = TestCommand{getX :: Int, getY :: Int, getVal :: Int}
+data Command = TestCommand
               |PutCommand Int Int Int
               |ExitCommand
               |UndefinedCommand {getName :: String}

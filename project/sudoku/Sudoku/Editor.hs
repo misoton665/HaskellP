@@ -1,7 +1,8 @@
 module Sudoku.Editor (
   editSDStage,
   editSDSquare,
-  editSDStage'
+  editSDStage',
+  rotateSDStage
   ) where
 
 import Sudoku.Data
@@ -17,3 +18,7 @@ editSDStage' targetPos newNum = editSDStage (SDSquare targetPos newNum)
 
 editSDSquare :: SDNum -> SDSquare -> SDSquare
 editSDSquare num oldSqu = SDSquare (getSDPos oldSqu) num
+
+rotateSDStage :: SDStage -> SDStage
+rotateSDStage stage = map rotateRow [0..8]
+  where rotateRow val = map (!! val) stage

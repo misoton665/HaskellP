@@ -3,7 +3,8 @@ module Controller.Game (
   ) where
 
 import Control.Applicative
-
+import Judge.Judger as Judge
+import Command.PutCommand as PCom
 import Command.TestCommand as TCom
 import Command.Data
 import Sudoku.Data
@@ -23,9 +24,15 @@ session stage command = case command of
     putStrLn $ "\"" ++ name ++ "\" command is not found."
     return stage
   
-  TestCommand _ _ _ -> do 
+  PutCommand _ _ _ -> do 
+    let newStage = PCom.command command stage
+    putStrLn . showSDStageSimply $ newStage
+    return newStage
+
+  TestCommand -> do
     let newStage = TCom.command command stage
-    putStrLn . showSDStage $ newStage
+    putStrLn . showSDStageSimply $ newStage
+    putStrLn . show $ Judge.judge newStage
     return newStage
 
   otherwise -> do 
@@ -42,8 +49,8 @@ gameAction = do
 
 toCommand :: [String] -> Command
 toCommand (x:xs) = case x of
-    "test"   -> TestCommand (xsi !! 0) (xsi !! 1) (xsi !! 2)
-    "put"    -> PutCommand (read $ xs !! 0) (read $ xs !! 1) (read $ xs !! 2) 
+    "test"   -> TestCommand
+    "put"    -> PutCommand (xsi !! 0) (xsi !! 1) (xsi !! 2) 
     "exit" -> ExitCommand
     otherwise -> UndefinedCommand x
     where xsi = map read xs :: [Int]
