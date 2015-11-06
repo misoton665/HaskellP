@@ -9,6 +9,7 @@ import Command.TestCommand as TCom
 import Command.Data
 import Sudoku.Data
 import Sudoku.Generator
+import Sudoku.Editor
 
 game :: SDStage -> IO ()
 game stage = do
@@ -24,7 +25,7 @@ session stage command = case command of
     putStrLn $ "\"" ++ name ++ "\" command is not found."
     return stage
   
-  PutCommand _ _ _ -> do 
+  PutCommand _ _ _ -> do
     let newStage = PCom.command command stage
     putStrLn . showSDStageSimply $ newStage
     return newStage
@@ -33,9 +34,11 @@ session stage command = case command of
     let newStage = TCom.command command stage
     putStrLn . showSDStageSimply $ newStage
     putStrLn . show $ Judge.judge newStage
+    putStrLn $ "\n"
+    sequence . map (putStrLn . showSDRowSimply) $ divideBoxes stage
     return newStage
 
-  otherwise -> do 
+  otherwise -> do
     putStrLn . show $ command
     return stage
 

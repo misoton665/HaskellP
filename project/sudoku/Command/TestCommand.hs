@@ -7,4 +7,4 @@ import Sudoku.Editor
 import Command.Data
 
 command :: Command -> SDStage -> (SDStage)
-command TestCommand stage = rotateSDStage stage
+command TestCommand stage = id stage

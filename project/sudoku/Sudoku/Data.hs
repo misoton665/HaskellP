@@ -10,7 +10,8 @@ module Sudoku.Data (
   showSDRow,
   showSDRowSimply,
   showSDStage,
-  showSDStageSimply
+  showSDStageSimply,
+  getBox
   ) where
 
 -- SDNum
@@ -29,7 +30,7 @@ showSDPos pos = "(" ++ (show $ fst pos) ++ ", " ++ (show $ snd pos) ++ ")"
 -- SDSquare
 data SDSquare = SDSquare {
   getSDPos :: SDPosition,
-  getSDNum :: SDNum }
+  getSDNum :: SDNum } deriving(Eq, Show)
 
 showSDSquare :: SDSquare -> String
 showSDSquare squ = (showSDPos $ getSDPos squ) ++ " : " ++ (showSDNum $ getSDNum squ)
@@ -51,6 +52,15 @@ showSDStage = mkString showSDRow "\n"
 
 showSDStageSimply :: SDStage -> String
 showSDStageSimply = mkString showSDRowSimply "\n"
+
+getSquWithIndex :: SDPosition -> SDStage -> SDSquare
+getSquWithIndex (x, y) stage = stage !! y !! x
+
+getBox :: (Int, Int) -> SDStage -> [SDSquare]
+getBox (x, y) stage = map (\pos -> getSquWithIndex (pos !! 0, pos !! 1) stage) seqRowColIndexes
+  where rowIndexes = map (+ (x * 3)) [0..2]
+        colIndexes = map (+ (y * 3)) [0..2]
+        seqRowColIndexes = sequence $ rowIndexes : colIndexes : []
 
 mkString :: (a -> String) -> String -> [a] -> String
 mkString shower bindStr = foldl (\acc x -> acc ++ bindStr ++ (shower x)) ""
