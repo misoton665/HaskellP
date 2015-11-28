@@ -16,8 +16,7 @@ game stage = do
   result <- gameAction
   case result of
     Nothing    -> return ()
-    (Just val) -> do
-      session stage val >>= game
+    (Just val) -> session stage val >>= game
 
 session :: SDStage -> Command -> IO SDStage
 session stage command = case command of
@@ -25,7 +24,7 @@ session stage command = case command of
     putStrLn $ "\"" ++ name ++ "\" command is not found."
     return stage
   
-  PutCommand _ _ _ -> do
+  PutCommand {} -> do
     let newStage = PCom.command command stage
     putStrLn . showSDStageSimply $ newStage
     return newStage
