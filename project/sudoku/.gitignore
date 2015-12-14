@@ -1,2 +1,4 @@
 test/*
-*/Use*
+Use*
+*.swp
+*.myswp
